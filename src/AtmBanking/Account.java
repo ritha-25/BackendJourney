@@ -1,3 +1,5 @@
+package AtmBanking;
+
 public abstract class Account implements Transactable {
     private String accountNumber;
     private double balance;
@@ -5,7 +7,7 @@ public abstract class Account implements Transactable {
 
     public Account(String accountNumber, double balance, User owner) throws BankException {
         if (accountNumber == null || accountNumber.isEmpty()) {
-            throw new BankException("Account number cannot be empty.");
+            throw new BankException("AtmBanking.Account number cannot be empty.");
         }
         if (balance < 0) {
             throw new BankException("Opening balance cannot be negative.");

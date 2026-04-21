@@ -1,3 +1,5 @@
+package AtmBanking;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -19,7 +21,7 @@ public class Main {
             atm.deposit(-50);
             atm.withdrawal(9999);
 
-            System.out.println("\n Current Account with Overdraft ");
+            System.out.println("\n Current AtmBanking.Account with Overdraft ");
             User nzaramba = new User("p10", "nzaramba", "456");
             Account current = new CurrentAccount("ca01", 500.0, nzaramba, 200.0);
 
@@ -30,7 +32,7 @@ public class Main {
             atm2.checkBalance();
             atm2.withdrawal(200);
 
-            System.out.println("Testing Invalid Account Creation ");
+            System.out.println("Testing Invalid AtmBanking.Account Creation ");
             Account bad = new SavingAccount("", -500.0, prince, 0.05);
 
         } catch (BankException e) {

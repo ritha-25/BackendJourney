@@ -1,3 +1,5 @@
+package AtmBanking;
+
 public class Atm {
     private Account currentAccount;
 

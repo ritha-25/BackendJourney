@@ -1,3 +1,5 @@
+package AtmBanking;
+
 public class SavingAccount extends Account {
     private double interestRate;
 
