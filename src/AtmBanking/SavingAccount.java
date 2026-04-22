@@ -20,6 +20,7 @@ public class SavingAccount extends Account {
             throw new BankException("Insufficient funds. Available: $" + getBalance());
         }
         setBalance(getBalance() - amount);
+        addTransaction("Withdrew $" + amount + " | Balance: $" + getBalance());
         System.out.println("Withdrew $" + amount + ". Remaining balance: $" + getBalance());
         return true;
     }

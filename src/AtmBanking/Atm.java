@@ -1,11 +1,17 @@
 package AtmBanking;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Atm {
     private Account currentAccount;
+
+    private Set<String> loggedInUsers = new HashSet<>();
 
     public boolean login(Account account, String pin) {
         if (account.getOwner().checkPin(pin)) {
             this.currentAccount = account;
+            loggedInUsers.add(account.getOwner().getName());
             System.out.println("Welcome, " + account.getOwner().getName() + "!");
             return true;
         }
@@ -31,5 +37,17 @@ public class Atm {
 
     public void checkBalance() {
         System.out.println("Current balance: $" + currentAccount.getBalance());
+    }
+
+    public void showLoggedInUsers() {
+        System.out.println("\n Users who used this ATM ");
+        for (String user : loggedInUsers) {
+            System.out.println(user);
+        }
+    }
+
+    public void removeUser(String name) {
+        loggedInUsers.remove(name);
+        System.out.println(name + " removed from session log.");
     }
 }

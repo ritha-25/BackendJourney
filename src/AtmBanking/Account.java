@@ -1,13 +1,18 @@
 package AtmBanking;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Account implements Transactable {
     private String accountNumber;
     private double balance;
     private User owner;
 
+    private List<String> transactionHistory = new ArrayList<>();
+
     public Account(String accountNumber, double balance, User owner) throws BankException {
         if (accountNumber == null || accountNumber.isEmpty()) {
-            throw new BankException("AtmBanking.Account number cannot be empty.");
+            throw new BankException("Account number cannot be empty.");
         }
         if (balance < 0) {
             throw new BankException("Opening balance cannot be negative.");
@@ -15,6 +20,7 @@ public abstract class Account implements Transactable {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.owner = owner;
+        transactionHistory.add("Account opened with $" + balance);
     }
 
     @Override
@@ -23,11 +29,27 @@ public abstract class Account implements Transactable {
             throw new BankException("Deposit amount must be greater than zero.");
         }
         balance += amount;
+        transactionHistory.add("Deposited $" + amount + " | Balance: $" + balance);
         System.out.println("Deposited $" + amount + ". New balance: $" + balance);
+    }
+
+    public void printTransactionHistory() {
+        System.out.println("\n--- Transaction History: " + accountNumber + " ---");
+        for (String t : transactionHistory) {
+            System.out.println(t);
+        }
+    }
+
+    public void removeLastTransaction() {
+        if (!transactionHistory.isEmpty()) {
+            transactionHistory.remove(transactionHistory.size() - 1);
+            System.out.println("Last transaction removed.");
+        }
     }
 
     public double getBalance()          { return balance; }
     public String getAccountNumber()    { return accountNumber; }
     public User getOwner()              { return owner; }
     protected void setBalance(double b) { this.balance = b; }
+    protected void addTransaction(String record) { transactionHistory.add(record); }
 }
