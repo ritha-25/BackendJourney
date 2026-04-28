@@ -35,6 +35,14 @@ public class Atm {
         }
     }
 
+    public void transfer(Account recipient, double amount) {
+        try {
+            currentAccount.transfer(recipient, amount);
+        } catch (BankException e) {
+            System.out.println("Transfer failed: " + e.getMessage());
+        }
+    }
+
     public void checkBalance() {
         System.out.println("Current balance: $" + currentAccount.getBalance());
     }

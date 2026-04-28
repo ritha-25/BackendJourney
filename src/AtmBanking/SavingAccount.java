@@ -30,4 +30,6 @@ public class SavingAccount extends Account {
         deposit(interest);
         System.out.println("Interest of $" + interest + " added at rate " + (interestRate * 100) + "%");
     }
+
+    public double getInterestRate() { return interestRate; }
 }

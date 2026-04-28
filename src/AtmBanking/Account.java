@@ -33,6 +33,32 @@ public abstract class Account implements Transactable {
         System.out.println("Deposited $" + amount + ". New balance: $" + balance);
     }
 
+    /**
+     * Transfer money to another account
+     */
+    public boolean transfer(Account recipient, double amount) throws BankException {
+        if (amount <= 0) {
+            throw new BankException("Transfer amount must be greater than zero.");
+        }
+        if (amount > balance) {
+            throw new BankException("Insufficient funds for transfer. Available: $" + balance);
+        }
+        if (recipient == null) {
+            throw new BankException("Recipient account not found.");
+        }
+        
+        // Withdraw from this account
+        this.balance -= amount;
+        transactionHistory.add("Transferred $" + amount + " to " + recipient.getAccountNumber());
+        
+        // Deposit to recipient
+        recipient.balance += amount;
+        recipient.transactionHistory.add("Received $" + amount + " from " + this.accountNumber);
+        
+        System.out.println("Successfully transferred $" + amount + " to account " + recipient.getAccountNumber());
+        return true;
+    }
+
     public void printTransactionHistory() {
         System.out.println("\n--- Transaction History: " + accountNumber + " ---");
         for (String t : transactionHistory) {

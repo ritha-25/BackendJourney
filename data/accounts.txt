@@ -1,0 +1,2 @@
+SA001,SavingAccount,1000.0,p09,10.0
+CA001,CurrentAccount,500.0,N10,200.0
